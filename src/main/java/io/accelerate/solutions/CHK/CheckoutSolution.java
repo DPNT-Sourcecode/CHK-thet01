@@ -21,10 +21,19 @@ public class CheckoutSolution {
             else if (c == 'E') eCount++;
             total += SKU_TO_PRICE.get(c);
         }
-        bCount -= (eCount / 2);
-        int aDiscount = Math.max((aCount / 3) * 20, (aCount / 5) * 50);
-        int discount = aDiscount + ((bCount / 2) * 15) + ((eCount / 2) * 30);
+
+        int eDiscount = 0;
+        while (bCount > 0 && eCount > 1) {
+            eDiscount += (eCount / 2) * 30;
+            bCount --;
+            eCount -= 2;
+        }
+
+        int initialADiscount = (aCount / 5) * 50;
+        aCount -= (aCount / 5) * 5;
+        int discount = initialADiscount + ((aCount / 3) * 20) + ((bCount / 2) * 15) + eDiscount;
         return total - discount;
     }
 }
+
 
