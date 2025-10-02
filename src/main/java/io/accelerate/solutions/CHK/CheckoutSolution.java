@@ -22,7 +22,9 @@ public class CheckoutSolution {
             total += SKU_TO_PRICE.get(c);
         }
         bCount -= (eCount / 2);
-        int discount = ((aCount / 3) * 20) + ((bCount / 2) * 15) + ((eCount / 2) * 30);
+        int aDiscount = Math.max((aCount / 3) * 20, (aCount / 5) * 50);
+        int discount = aDiscount + ((bCount / 2) * 15) + ((eCount / 2) * 30);
         return total - discount;
     }
 }
+
