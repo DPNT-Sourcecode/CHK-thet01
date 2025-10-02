@@ -6,7 +6,7 @@ public class CheckoutSolution {
     private static final Map<Character, Integer> SKU_TO_PRICE = Map.of(
             'A', 50,
             'B', 30,
-            'C', 75,
+            'C', 20,
             'D', 3,
             'E', 17
     );
@@ -16,11 +16,8 @@ public class CheckoutSolution {
             if (!Character.isLetter(c)) {
                 continue;
             }
-            total += (c - 'A');
+            total += SKU_TO_PRICE.get(c);
         }
         return total;
     }
 }
-
-
-

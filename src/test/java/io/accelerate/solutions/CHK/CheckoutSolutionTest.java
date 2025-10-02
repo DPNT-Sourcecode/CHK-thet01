@@ -17,7 +17,6 @@ public class CheckoutSolutionTest {
     @Test
     public void checkout() {
 
-        assertThat(total.checkout("123"), equalTo(123));
+        assertThat(total.checkout("A"), equalTo(50));
     }
 }
-
