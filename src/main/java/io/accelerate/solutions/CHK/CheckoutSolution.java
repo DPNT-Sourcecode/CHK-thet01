@@ -13,13 +13,14 @@ public class CheckoutSolution {
     public Integer checkout(String skus) {
         int total = 0;
         for (char c : skus.toCharArray()) {
-            if (!Character.isLetter(c)) {
-                continue;
+            if (SKU_TO_PRICE.get(c) == null) {
+                return -1;
             }
-            total += SKU_TO_PRICE.getOrDefault(c, -1);
+            total += SKU_TO_PRICE.get(c);
         }
         return total;
     }
 }
+
 
 
