@@ -11,16 +11,20 @@ public class CheckoutSolution {
             'E', 40
     );
     public Integer checkout(String skus) {
-        int total = 0;
+        int total = 0, aCount = 0, bCount = 0;
         for (char c : skus.toCharArray()) {
             if (SKU_TO_PRICE.get(c) == null) {
                 return -1;
             }
+            if (c == 'A') aCount++;
+            else if (c == 'B') bCount++;
             total += SKU_TO_PRICE.get(c);
         }
-        return total;
+        int discount = ((aCount / 3) * 20) + ((bCount / 2) * 15);
+        return total - discount;
     }
 }
+
 
 
 
