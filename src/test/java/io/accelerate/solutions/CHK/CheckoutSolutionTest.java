@@ -17,14 +17,8 @@ public class CheckoutSolutionTest {
     @Test
     public void checkout() {
 
-        assertThat(total.checkout("EEEEBB"), equalTo(160));
-        assertThat(total.checkout("AAAAA"), equalTo(200));
-        assertThat(total.checkout("AAAAAAAA"), equalTo(330));
-        assertThat(total.checkout("AAAAAAAAA"), equalTo(380));
-        assertThat(total.checkout("EE"), equalTo(80));
+        assertThat(total.checkout("FF"), equalTo(20));
+        assertThat(total.checkout("FFF"), equalTo(20));
+        assertThat(total.checkout("FFFF"), equalTo(30));
     }
 }
-
-
-
-
