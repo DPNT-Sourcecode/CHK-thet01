@@ -1,77 +1,85 @@
 package io.accelerate.solutions.CHK;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CheckoutSolution {
-    private static final Map<Character, Integer> SKU_TO_PRICE = Map.of(
-            'A', 50,
-            'B', 30,
-            'C', 20,
-            'D', 15,
-            'E', 40,
-            'F', 10
-    );
-    private static final Map<Character, Integer> SKU_TO_PRICE_2 = Map.of(
+    private static final Map<Character, Integer> SKU_TO_PRICE = Map.ofEntries(
         Map.entry('A', 50),
         Map.entry('B', 30),
         Map.entry('C', 20),
         Map.entry('D', 15),
         Map.entry('E', 40),
-        Map.entry('F', 10)
+        Map.entry('F', 10),
+        Map.entry('G', 20),
+        Map.entry('H', 10),
+        Map.entry('I', 35),
+        Map.entry('J', 60),
+        Map.entry('K', 80),
+        Map.entry('L', 90),
+        Map.entry('M', 15),
+        Map.entry('N', 40),
+        Map.entry('O', 10),
+        Map.entry('P', 50),
+        Map.entry('Q', 30),
+        Map.entry('R', 50),
+        Map.entry('S', 30),
+        Map.entry('T', 20),
+        Map.entry('U', 40),
+        Map.entry('V', 50),
+        Map.entry('W', 20),
+        Map.entry('X', 90),
+        Map.entry('Y', 10),
+        Map.entry('Z', 50)
     );
-        'A', 50,
-        'B', 30,
-        'C', 20,
-        'D', 15,
-        'E', 40,
-        'F', 10,
-        'G', 20,
-        'H', 10,
-        'I', 35,
-        'J', 60,
-        'K', 80,
-        'L', 90,
-        'M', 15,
-        'N', 40,
-        'O', 10,
-        'P', 50,
-        'Q', 30,
-        'R', 50,
-        'S', 30,
-        'T', 20,
-        'U', 40,
-        'V', 50,
-        'W', 20,
-        'X', 90,
-        'Y', 10,
-        'Z', 50
-    );
+
     public Integer checkout(String skus) {
-        int total = 0, aCount = 0, bCount = 0, eCount = 0, fCount = 0;
+        Map<Character, Integer> skuCounts = new HashMap<>();
+        int total = 0;
         for (char c : skus.toCharArray()) {
             if (SKU_TO_PRICE.get(c) == null) {
                 return -1;
             }
-            if (c == 'A') aCount++;
-            else if (c == 'B') bCount++;
-            else if (c == 'E') eCount++;
-            else if (c == 'F') fCount++;
+            skuCounts.put(c, skuCounts.getOrDefault(c, 0) + 1);
             total += SKU_TO_PRICE.get(c);
         }
 
         int eDiscount = 0;
-        while (bCount > 0 && eCount > 1) {
+        while (skuCounts.getOrDefault('B', 0) > 0 && skuCounts.getOrDefault('E', 0) > 1) {
             eDiscount += 30;
-            bCount --;
-            eCount -= 2;
+            skuCounts.put('B', skuCounts.get('B') - 1);
+            skuCounts.put('E', skuCounts.get('E') - 2);
         }
 
-        int initialADiscount = (aCount / 5) * 50;
-        aCount -= (aCount / 5) * 5;
+        int nDiscount = 0;
+        while (skuCounts.getOrDefault('M', 0) > 0 && skuCounts.getOrDefault('N', 0) > 2) {
+            nDiscount += 15;
+            skuCounts.put('M', skuCounts.get('M') - 1);
+            skuCounts.put('N', skuCounts.get('N') - 3);
+        }
 
-        int fDiscount = ((fCount / 3) * 10);
+        int rDiscount = 0;
+        while (skuCounts.getOrDefault('Q', 0) > 0 && skuCounts.getOrDefault('R', 0) > 2) {
+            rDiscount += 30;
+            skuCounts.put('Q', skuCounts.get('Q') - 1);
+            skuCounts.put('R', skuCounts.get('R') - 3);
+        }
 
-        int discount = initialADiscount + ((aCount / 3) * 20) + ((bCount / 2) * 15) + eDiscount + ((fCount / 3) * 10);
+        int initialADiscount = (skuCounts.getOrDefault('A', 0) / 5) * 50;
+        skuCounts.put('A', skuCounts.getOrDefault('A', 0) - (skuCounts.getOrDefault('A', 0) / 5) * 5);
+
+        int initialHDiscount = (skuCounts.getOrDefault('H', 0) / 10) * 20;
+        skuCounts.put('H', skuCounts.getOrDefault('H', 0) - (skuCounts.getOrDefault('H', 0) / 10) * 10);
+
+        int initialVDiscount = (skuCounts.getOrDefault('V', 0) / 3) * 20;
+        skuCounts.put('V', skuCounts.getOrDefault('V', 0) - (skuCounts.getOrDefault('V', 0) / 3) * 3);
+
+        int discount = initialADiscount + ((skuCounts.getOrDefault('A', 0) / 3) * 20) + ((skuCounts.getOrDefault('B', 0) / 2) * 15) +
+            eDiscount + ((skuCounts.getOrDefault('F', 0) / 3) * 10) + initialHDiscount + ((skuCounts.getOrDefault('H', 0) / 5) * 5) +
+            ((skuCounts.getOrDefault('K', 0) / 2) * 10) + nDiscount + ((skuCounts.getOrDefault('P', 0) / 5) * 50) + ((skuCounts.getOrDefault('Q', 0) / 3) * 10)
+            + rDiscount + ((skuCounts.getOrDefault('U', 0) / 4) * 40) + initialVDiscount + ((skuCounts.getOrDefault('V', 0) / 2) * 10);
+
         return total - discount;
     }
 }
+
