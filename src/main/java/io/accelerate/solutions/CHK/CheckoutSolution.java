@@ -15,7 +15,7 @@ public class CheckoutSolution {
         Map.entry('H', 10),
         Map.entry('I', 35),
         Map.entry('J', 60),
-        Map.entry('K', 80),
+        Map.entry('K', 70),
         Map.entry('L', 90),
         Map.entry('M', 15),
         Map.entry('N', 40),
@@ -23,14 +23,14 @@ public class CheckoutSolution {
         Map.entry('P', 50),
         Map.entry('Q', 30),
         Map.entry('R', 50),
-        Map.entry('S', 30),
+        Map.entry('S', 20),
         Map.entry('T', 20),
         Map.entry('U', 40),
         Map.entry('V', 50),
         Map.entry('W', 20),
-        Map.entry('X', 90),
-        Map.entry('Y', 10),
-        Map.entry('Z', 50)
+        Map.entry('X', 17),
+        Map.entry('Y', 20),
+        Map.entry('Z', 21)
     );
 
     public Integer checkout(String skus) {
@@ -74,12 +74,47 @@ public class CheckoutSolution {
         int initialVDiscount = (skuCounts.getOrDefault('V', 0) / 3) * 20;
         skuCounts.put('V', skuCounts.getOrDefault('V', 0) - (skuCounts.getOrDefault('V', 0) / 3) * 3);
 
+        int finalDiscount = 0;
+        while (skuCounts.getOrDefault('S', 0) + skuCounts.getOrDefault('T', 0) + skuCounts.getOrDefault('X', 0) + skuCounts.getOrDefault('Y', 0) + skuCounts.getOrDefault('Z', 0) > 2) {
+            int items = 0, price = 0;
+            while (items < 2) {
+                if (skuCounts.getOrDefault('Z', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('Z');
+                    skuCounts.put('Z', skuCounts.get('Z') - 1);
+                }
+                else if (skuCounts.getOrDefault('Y', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('Y');
+                    skuCounts.put('Y', skuCounts.get('Y') - 1);
+                }
+                else if (skuCounts.getOrDefault('X', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('X');
+                    skuCounts.put('X', skuCounts.get('X') - 1);
+                }
+                else if (skuCounts.getOrDefault('Z', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('Z');
+                    skuCounts.put('Y', skuCounts.get('Y') - 1);
+                }
+                else if (skuCounts.getOrDefault('X', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('X');
+                    skuCounts.put('X', skuCounts.get('X') - 1);
+                } else {
+                    break;
+                }
+            }
+        }
+
         int discount = initialADiscount + ((skuCounts.getOrDefault('A', 0) / 3) * 20) + ((skuCounts.getOrDefault('B', 0) / 2) * 15) +
             eDiscount + ((skuCounts.getOrDefault('F', 0) / 3) * 10) + initialHDiscount + ((skuCounts.getOrDefault('H', 0) / 5) * 5) +
-            ((skuCounts.getOrDefault('K', 0) / 2) * 10) + nDiscount + ((skuCounts.getOrDefault('P', 0) / 5) * 50) + ((skuCounts.getOrDefault('Q', 0) / 3) * 10)
-            + rDiscount + ((skuCounts.getOrDefault('U', 0) / 4) * 40) + initialVDiscount + ((skuCounts.getOrDefault('V', 0) / 2) * 10);
+            ((skuCounts.getOrDefault('K', 0) / 2) * 20) + nDiscount + ((skuCounts.getOrDefault('P', 0) / 5) * 50) + ((skuCounts.getOrDefault('Q', 0) / 3) * 10)
+            + rDiscount + ((skuCounts.getOrDefault('U', 0) / 4) * 40) + initialVDiscount + ((skuCounts.getOrDefault('V', 0) / 2) * 10) + finalDiscount;
 
         return total - discount;
     }
 }
+
 
