@@ -18,9 +18,13 @@ public class CheckoutSolutionTest {
     public void checkout() {
 
         assertThat(total.checkout("EEEEBB"), equalTo(160));
-        assertThat(total.checkout("BEBEEE"), equalTo(160));
+        assertThat(total.checkout("AAAAA"), equalTo(200));
+        assertThat(total.checkout("AAAAAAAA"), equalTo(330));
+        assertThat(total.checkout("AAAAAAAAA"), equalTo(380));
+        assertThat(total.checkout("EE"), equalTo(80));
     }
 }
+
 
 
 

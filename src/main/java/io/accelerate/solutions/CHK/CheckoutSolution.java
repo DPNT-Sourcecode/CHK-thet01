@@ -24,7 +24,7 @@ public class CheckoutSolution {
 
         int eDiscount = 0;
         while (bCount > 0 && eCount > 1) {
-            eDiscount += (eCount / 2) * 30;
+            eDiscount += 30;
             bCount --;
             eCount -= 2;
         }
@@ -35,5 +35,6 @@ public class CheckoutSolution {
         return total - discount;
     }
 }
+
 
 
