@@ -16,8 +16,9 @@ public class CheckoutSolution {
             if (!Character.isLetter(c)) {
                 continue;
             }
-            total += SKU_TO_PRICE.get(c);
+            total += SKU_TO_PRICE.getOrDefault(c, 0);
         }
         return total;
     }
 }
+
