@@ -40,5 +40,13 @@ public class CheckoutSolutionTest {
         assertThat(total.checkout("VV"), equalTo(90));
         assertThat(total.checkout("VVV"), equalTo(130));
         assertThat(total.checkout("VVVVV"), equalTo(220));
+        assertThat(total.checkout("YYY"), equalTo(45));
+        assertThat(total.checkout("XXX"), equalTo(45));
+        assertThat(total.checkout("ZZZ"), equalTo(45));
+        assertThat(total.checkout("SSS"), equalTo(45));
+        assertThat(total.checkout("TTT"), equalTo(45));
+        assertThat(total.checkout("XYZ"), equalTo(45));
+        assertThat(total.checkout("ZZYYY"), equalTo(85));
     }
 }
+

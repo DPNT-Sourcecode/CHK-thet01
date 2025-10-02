@@ -77,7 +77,7 @@ public class CheckoutSolution {
         int finalDiscount = 0;
         while (skuCounts.getOrDefault('S', 0) + skuCounts.getOrDefault('T', 0) + skuCounts.getOrDefault('X', 0) + skuCounts.getOrDefault('Y', 0) + skuCounts.getOrDefault('Z', 0) > 2) {
             int items = 0, price = 0;
-            while (items < 2) {
+            while (items < 3) {
                 if (skuCounts.getOrDefault('Z', 0) > 0) {
                     items++;
                     price += skuCounts.get('Z');
@@ -88,24 +88,23 @@ public class CheckoutSolution {
                     price += skuCounts.get('Y');
                     skuCounts.put('Y', skuCounts.get('Y') - 1);
                 }
+                else if (skuCounts.getOrDefault('S', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('S');
+                    skuCounts.put('S', skuCounts.get('S') - 1);
+                }
+                else if (skuCounts.getOrDefault('T', 0) > 0) {
+                    items++;
+                    price += skuCounts.get('T');
+                    skuCounts.put('T', skuCounts.get('T') - 1);
+                }
                 else if (skuCounts.getOrDefault('X', 0) > 0) {
                     items++;
                     price += skuCounts.get('X');
                     skuCounts.put('X', skuCounts.get('X') - 1);
-                }
-                else if (skuCounts.getOrDefault('Z', 0) > 0) {
-                    items++;
-                    price += skuCounts.get('Z');
-                    skuCounts.put('Y', skuCounts.get('Y') - 1);
-                }
-                else if (skuCounts.getOrDefault('X', 0) > 0) {
-                    items++;
-                    price += skuCounts.get('X');
-                    skuCounts.put('X', skuCounts.get('X') - 1);
-                } else {
-                    break;
                 }
             }
+            finalDiscount += price - 45;
         }
 
         int discount = initialADiscount + ((skuCounts.getOrDefault('A', 0) / 3) * 20) + ((skuCounts.getOrDefault('B', 0) / 2) * 15) +
@@ -116,3 +115,4 @@ public class CheckoutSolution {
         return total - discount;
     }
 }
+
