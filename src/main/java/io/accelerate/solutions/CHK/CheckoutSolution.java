@@ -80,27 +80,27 @@ public class CheckoutSolution {
             while (items < 3) {
                 if (skuCounts.getOrDefault('Z', 0) > 0) {
                     items++;
-                    price += skuCounts.get('Z');
+                    price += SKU_TO_PRICE.get('Z');
                     skuCounts.put('Z', skuCounts.get('Z') - 1);
                 }
                 else if (skuCounts.getOrDefault('Y', 0) > 0) {
                     items++;
-                    price += skuCounts.get('Y');
+                    price += SKU_TO_PRICE.get('Y');
                     skuCounts.put('Y', skuCounts.get('Y') - 1);
                 }
                 else if (skuCounts.getOrDefault('S', 0) > 0) {
                     items++;
-                    price += skuCounts.get('S');
+                    price += SKU_TO_PRICE.get('S');
                     skuCounts.put('S', skuCounts.get('S') - 1);
                 }
                 else if (skuCounts.getOrDefault('T', 0) > 0) {
                     items++;
-                    price += skuCounts.get('T');
+                    price += SKU_TO_PRICE.get('T');
                     skuCounts.put('T', skuCounts.get('T') - 1);
                 }
                 else if (skuCounts.getOrDefault('X', 0) > 0) {
                     items++;
-                    price += skuCounts.get('X');
+                    price += SKU_TO_PRICE.get('X');
                     skuCounts.put('X', skuCounts.get('X') - 1);
                 }
             }
@@ -115,4 +115,5 @@ public class CheckoutSolution {
         return total - discount;
     }
 }
+
 
