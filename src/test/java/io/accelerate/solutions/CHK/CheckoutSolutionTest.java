@@ -42,4 +42,3 @@ public class CheckoutSolutionTest {
         assertThat(total.checkout("VVVVV"), equalTo(220));
     }
 }
-
